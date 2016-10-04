@@ -16,9 +16,9 @@ from subprocess import call
 ##Configuration parameters
 #MySQL DB Connection
 db_host = 'localhost'
-db_user = 'scanforsec'
-db_pass = 'Dtctksqvjkjnjr192'
-db_database = 'scanforsec'
+db_user = 'test'
+db_pass = 'test'
+db_database = 'test'
 
 #Options
 option = sys.argv[1]
