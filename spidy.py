@@ -236,14 +236,16 @@ class execute_checks:
 			results = db_cur.fetchall()
 			for host in results:
 				try:
-					client = MongoClient('mongodb://'+host+':27017/', serverSelectionTimeoutMS=5)
+					client = MongoClient('mongodb://'+host[0]+':27017/', serverSelectionTimeoutMS=5)
 					databases = client.database_names()
 					databases = "success"
-					db_cur.execute("UPDATE test_scan SET banner = '%s' WHERE host = '%s' AND port = '27017'" % (databases, host))
+					db_cur.execute("UPDATE test_scan SET banner = '%s' WHERE host = '%s' AND port = '27017'" % (databases, host[0]))
+					client.close()
 				except:
 					databases = "fail"
-					db_cur.execute("UPDATE test_scan SET banner = '%s' WHERE host = '%s' AND port = '27017'" % (databases, host))
-				client.close()
+					db_cur.execute("UPDATE test_scan SET banner = '%s' WHERE host = '%s' AND port = '27017'" % (databases, host[0]))
+					pass
+					client.close()
 			db_connect.close()
 
 
