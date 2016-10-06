@@ -100,7 +100,7 @@ $port = mysql_real_escape_string($_POST['port']);
 $success = mysql_real_escape_string($_POST['success']);
 
 
-if(isset($port) || isset($host)) {
+if(!empty($port) || !empty($host)) {
 
   echo "<table class='table table-bordered'>";
   echo "<thead><tr><th>Хосты</th><th>Порты</th><th>Статус</th><th>Дата</th></tr></thead>";
