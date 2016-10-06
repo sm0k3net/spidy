@@ -12,6 +12,7 @@ import re
 import MySQLdb
 from ftplib import FTP
 from subprocess import call
+from pymongo import MongoClient
 
 ##Configuration parameters
 #MySQL DB Connection
