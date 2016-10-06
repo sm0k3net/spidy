@@ -70,7 +70,7 @@ $hosts_query = mysql_query("SELECT COUNT(DISTINCT(host)) FROM test_scan");
 $uniq_hosts = mysql_fetch_row($hosts_query);
 $ports_query = mysql_query("SELECT COUNT(DISTINCT(port)) FROM test_scan");
 $uniq_ports = mysql_fetch_row($ports_query);
-$banners_query = mysql_query("SELECT COUNT(banner) FROM test_scan WHERE banner <> ''");
+$banners_query = mysql_query("SELECT COUNT(banner) FROM test_scan WHERE banner = 'success'");
 $uniq_banners = mysql_fetch_row($banners_query);
 $last_update = mysql_query("SELECT date FROM test_scan ORDER BY date desc LIMIT 1");
 $last_date = mysql_fetch_row($last_update);
