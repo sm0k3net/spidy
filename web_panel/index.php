@@ -41,8 +41,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav pull-right">
-            <li><a href="index.php"><span class="glyphicon glyphicon-list-alt" aria-hidden=""></span> Статистика</a></li>
-            <li><a href="index.php?p=search"><span class="glyphicon glyphicon-search" aria-hidden=""></span> Поиск результатов</a></li>
+            <li><a href="index.php"><span class="glyphicon glyphicon-list-alt" aria-hidden=""></span> Stats</a></li>
+            <li><a href="index.php?p=search"><span class="glyphicon glyphicon-search" aria-hidden=""></span> Search results</a></li>
           </ul>
         </div>
       </div>
@@ -50,15 +50,15 @@
 <?php
 $page_detect = $_SERVER[REQUEST_URI];
 $page_search = $_SERVER["PHP_SELF"]."?p=search";
-if($page_detect == $page_search) { $page = "Поиск по базе"; } 
-else { $page = "Статистика"; }
+if($page_detect == $page_search) { $page = "Search in database"; } 
+else { $page = "Stats"; }
 ?>
 
 <div class="container">
 <div class="row">
 <div class="col-lg-10 col-lg-offset-1">
 
-<h3 style="color: #3399f3;">Spidy - простой сканер интернетов<small> [ <?php echo $page; ?> ]</small></h3>
+<h3 style="color: #3399f3;">Spidy - simple internet scanner<small> [ <?php echo $page; ?> ]</small></h3>
 <hr />
 </div>
 <?php 
@@ -77,21 +77,21 @@ $last_date = mysql_fetch_row($last_update);
 
 ?>
 <div class="col-lg-8 col-lg-offset-1">
-  <h2>Статистика сканирования <small>[ Всего результатов: <?php echo $total_result[0]; ?> ]</small></h2>
+  <h2>Scanning stats <small>[ Total results: <?php echo $total_result[0]; ?> ]</small></h2>
   <table class="table table-bordered">
-    <thead><tr><th>Уник. хостов</th><th>Уник. портов</th><th>Успешных доступов</th><th>Последнее обновление</th></tr></thead>
+    <thead><tr><th>Uniq. hosts</th><th>Uniq. ports</th><th>Successful access</th><th>Last update</th></tr></thead>
     <tbody>
       <tr><td><?echo $uniq_hosts[0];?></td><td><?echo $uniq_ports[0];?></td><td><?echo $uniq_banners[0];?></td><td><?echo $last_date[0];?></td></tr>
   </tbody></table>
 </div>
 <?php } else {?>
 <div class="col-lg-8 col-lg-offset-1">
-  <h2>Поиск по базе данных</h2>
+  <h2>Database search</h2>
   <form action="<?echo $page_search;?>" method="post" role="form">
-    <input type="text" name="port"  value="" placeholder="Порт" />
-    <input type="text" name="host"  value="" placeholder="Хост" />
-      Показывать только успешные попытки <input type="checkbox" name="success" value="success" /> 
-    <input type="submit" value="Найти" class="form-control" />
+    <input type="text" name="port"  value="" placeholder="Port" />
+    <input type="text" name="host"  value="" placeholder="Host" />
+      Show only successful attempts <input type="checkbox" name="success" value="success" /> 
+    <input type="submit" value="Find" class="form-control" />
   </form>
 <hr />
 <?php
@@ -103,7 +103,7 @@ $success = mysql_real_escape_string($_POST['success']);
 if(!empty($port) || !empty($host)) {
 
   echo "<table class='table table-bordered'>";
-  echo "<thead><tr><th>Хосты</th><th>Порты</th><th>Статус</th><th>Дата</th></tr></thead>";
+  echo "<thead><tr><th>Hosts</th><th>Ports</th><th>State</th><th>Date</th></tr></thead>";
   echo "<tbody>";
 
 $search_query = mysql_query("SELECT * FROM test_scan WHERE host LIKE '$host' and banner LIKE '%{$success}%' OR port = '$port' AND banner LIKE '%{$success}%'");
